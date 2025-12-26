@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leu - Technical Artist / Engineer / Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --accent: #93CCEA;
+      --accent-dim: rgba(147, 204, 234, 0.15);
+      --bg: #0f0f0f;
+      --card: #1a1a1a;
+      --text: #e8e8e8;
+      --text-dim: #888;
+      --border: #2a2a2a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* Subtle grid background */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: 
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+
+    /* Accent glow */
+    body::after {
+      content: '';
+      position: fixed;
+      top: -50%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 400px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2.5rem 2rem;
+      animation: fadeUp 0.6s ease-out;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .profile {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid var(--accent);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .avatar::after {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border-radius: 50%;
+      border: 2px solid var(--accent);
+      opacity: 0.3;
+    }
+
+    .name {
+      font-family: 'Space Mono', monospace;
+      font-size: 1.75rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.5rem;
+      color: var(--text);
+    }
+
+    .title {
+      font-size: 0.8rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+
+    .bio {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--text-dim);
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), transparent);
+      margin: 1.5rem 0;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .link-btn {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .link-btn::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      height: 100%;
+      width: 3px;
+      background: var(--accent);
+      transform: scaleY(0);
+      transition: transform 0.2s ease;
+    }
+
+    .link-btn:hover {
+      border-color: var(--accent);
+      background: var(--accent-dim);
+      transform: translateX(4px);
+    }
+
+    .link-btn:hover::before {
+      transform: scaleY(1);
+    }
+
+    .link-icon {
+      width: 24px;
+      height: 24px;
+      flex-shrink: 0;
+    }
+
+    .link-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: var(--accent);
+    }
+
+    .link-text {
+      flex: 1;
+    }
+
+    .link-label {
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    .link-sub {
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-top: 0.15rem;
+    }
+
+    .link-arrow {
+      color: var(--text-dim);
+      transition: transform 0.2s ease;
+    }
+
+    .link-btn:hover .link-arrow {
+      transform: translateX(4px);
+      color: var(--accent);
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      opacity: 0.5;
+    }
+
+    /* Animation delays for links */
+    .link-btn:nth-child(1) { animation: fadeUp 0.6s ease-out 0.1s both; }
+    .link-btn:nth-child(2) { animation: fadeUp 0.6s ease-out 0.2s both; }
+    .link-btn:nth-child(3) { animation: fadeUp 0.6s ease-out 0.3s both; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="profile">
+        <div class="avatar">
+          <img src="logo.png" alt="Leu">
+        </div>
+        <h1 class="name">Leu</h1>
+        <p class="title">Technical Artist / Engineer / Researcher</p>
+        <p class="bio">VRChat向けのギミックやツールなどでお手伝いできます。気軽に声をかけてください。</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="links">
+        <a href="https://x.com/YOUR_USERNAME" class="link-btn" target="_blank" rel="noopener">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+            </svg>
+          </div>
+          <div class="link-text">
+            <div class="link-label">X (Twitter)</div>
+            <div class="link-sub">@YOUR_USERNAME</div>
+          </div>
+          <span class="link-arrow">→</span>
+        </a>
+
+        <a href="https://github.com/YOUR_USERNAME" class="link-btn" target="_blank" rel="noopener">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </div>
+          <div class="link-text">
+            <div class="link-label">GitHub</div>
+            <div class="link-sub">@YOUR_USERNAME</div>
+          </div>
+          <span class="link-arrow">→</span>
+        </a>
+
+        <a href="mailto:your@email.com" class="link-btn">
+          <div class="link-icon">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </div>
+          <div class="link-text">
+            <div class="link-label">Email</div>
+            <div class="link-sub">your@email.com</div>
+          </div>
+          <span class="link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <p class="footer">© 2025 Leu</p>
+  </div>
+</body>
+</html>
